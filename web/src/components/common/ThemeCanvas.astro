@@ -19,7 +19,7 @@ const Icon = DistroIcons[iconId as keyof typeof DistroIcons];
     bg-[radial-gradient(circle,color-mix(in_srgb,var(--accent)_15%,transparent)_0%,transparent_70%)]">
   </div>
 
-  <div class="flex flex-row items-center justify-between h-full px-[120px] relative z-10">
+  <div class="relative h-full px-[120px] flex flex-row items-center justify-between z-10">
     <figure class="relative size-[360px] flex items-center justify-center">
       <div class="absolute size-[720px] flex items-center justify-center opacity-20 blur-[40px]">
         {Icon && <Icon class="size-[720px]" />}

@@ -1,0 +1,23 @@
+---
+interface Props {
+  class?: string;
+  isActive?: boolean;
+  value: string;
+  [key: string]: any;
+}
+
+const { class: className, isActive = false, value, ...rest } = Astro.props;
+
+const baseStyles = 'px-5 py-2 text-sm font-bold uppercase rounded cursor-pointer transition-colors';
+const activeStyles = 'text-dark bg-arch';
+const inactiveStyles = 'text-slate-400 bg-transparent hover:text-arch';
+---
+
+<button
+  role="tab"
+  aria-selected={isActive}
+  data-filter={value}
+  class:list={[baseStyles, isActive ? activeStyles : inactiveStyles, className]}
+  {...rest}>
+  <slot />
+</button>

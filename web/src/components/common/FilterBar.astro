@@ -1,0 +1,39 @@
+---
+import FilterTab from '@components/common/FilterTab.astro';
+
+interface FilterOption {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  items: Record<string, any>[];
+  filterKey: string;
+  active?: string;
+  class?: string;
+}
+
+const { items, filterKey, active, class: className } = Astro.props;
+
+const uniqueValues = [...new Set(items.map((item) => item[filterKey]))];
+
+const filters: FilterOption[] = [
+  { label: 'All', value: 'all' },
+  ...uniqueValues.map((v) => ({ label: v, value: v })),
+];
+
+const activeFilter = active ?? 'all';
+---
+
+<div class:list={['w-fit p-2 flex gap-2 bg-layer/50 border border-edge rounded-xl', className]}>
+  {
+    filters.map((filter) => (
+      <FilterTab
+        value={filter.value}
+        isActive={filter.value === activeFilter}
+        aria-label={`Filter by ${filter.label}`}>
+        {filter.label}
+      </FilterTab>
+    ))
+  }
+</div>
