@@ -1,0 +1,21 @@
+{
+  "name": "web",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "prettier --write \"src/**/*.{astro,ts,js,css,json}\"",
+    "format:check": "prettier --check \"src/**/*.{astro,ts,js,css,json}\""
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "4.1.18",
+    "astro": "5.17.1",
+    "prettier": "3.8.1",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-organize-imports": "4.3.0",
+    "tailwindcss": "4.1.18"
+  }
+}
