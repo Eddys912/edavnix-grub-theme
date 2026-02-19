@@ -1,0 +1,31 @@
+---
+import '@src/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Export - {title}</title>
+  </head>
+
+  <body class="canvas">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  body.canvas {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background-color: var(--color-dark);
+    font-family: var(--font-display);
+  }
+</style>
