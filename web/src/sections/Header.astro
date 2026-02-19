@@ -1,0 +1,49 @@
+---
+import Container from '@components/common/Container.astro';
+import GithubIcon from '@icons/ui/Github.astro';
+---
+
+<header class="py-3 sticky top-0 z-50 bg-glass border-b border-edge backdrop-blur-md">
+  <Container>
+    <div class="flex items-center justify-between gap-8">
+      <a href="/" class="text-white text-2xl font-bold uppercase" aria-label="Go to home">
+        Edav<span class="text-arch">Nix</span>
+      </a>
+
+      <div class="flex-1 max-w-xl">
+        <div class="relative group">
+          <label for="search-input" class="sr-only">Search themes</label>
+          <input
+            id="search-input"
+            class="w-full pl-4 pr-20 py-2 text-sm bg-dark/50 border border-edge rounded
+            focus:ring-1 focus:ring-arch focus:border-arch outline-none transition-all
+            placeholder:text-slate-400"
+            placeholder="Search themes..."
+            type="search"
+            aria-label="Search themes"
+            autocomplete="off"
+          />
+
+          <div
+            class="absolute right-2 top-1/2 -translate-y-1/2 flex items-center pointer-events-none"
+            aria-hidden="true">
+            <kbd
+              class="flex items-center justify-center min-w-5 h-5 px-1.5 text-slate-400 text-xs
+              font-medium bg-layer border border-edge rounded">
+              CTRL + K
+            </kbd>
+          </div>
+        </div>
+      </div>
+
+      <a
+        class="text-white"
+        href="https://github.com/Eddys912/edavnix-grub-theme.git"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="View project on GitHub">
+        <GithubIcon class="size-6" aria-hidden="true" />
+      </a>
+    </div>
+  </Container>
+</header>
