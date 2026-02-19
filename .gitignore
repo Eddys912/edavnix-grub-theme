@@ -1,0 +1,38 @@
+# Gitignore for edavnix-grub-theme
+# Documentation: https://git-scm.com/docs/gitignore
+
+# Build output
+dist/
+dist-theme/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.production
+.env.local
+*.local
+
+# Temporary or backup files
+*~
+*.temp
+*.tmp
+*.bak
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
