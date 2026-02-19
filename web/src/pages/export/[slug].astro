@@ -1,0 +1,18 @@
+---
+import ThemeCanvas from '@components/common/ThemeCanvas.astro';
+import { themes, themeSlugs } from '@data/themes';
+import CanvasLayout from '@layouts/CanvasLayout.astro';
+
+export function getStaticPaths() {
+  return themeSlugs.map((slug) => ({
+    params: { slug },
+    props: { theme: themes[slug] },
+  }));
+}
+
+const { theme } = Astro.props;
+---
+
+<CanvasLayout title={`${theme.name}${theme.suffix}`}>
+  <ThemeCanvas {...theme} />
+</CanvasLayout>

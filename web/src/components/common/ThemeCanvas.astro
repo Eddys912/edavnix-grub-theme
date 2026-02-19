@@ -1,0 +1,59 @@
+---
+import * as DistroIcons from '@icons/distros';
+
+interface Props {
+  name: string;
+  suffix?: string;
+  color?: string;
+  iconId: string;
+}
+
+const { name, suffix = '', color = '#ffffff', iconId } = Astro.props;
+const Icon = DistroIcons[iconId as keyof typeof DistroIcons];
+---
+
+<div
+  class="relative w-[1920px] h-[1080px] text-[var(--accent)] bg-dark overflow-hidden select-none">
+  <div
+    class="absolute size-[1200px] -top-20 right-0 rounded-full blur-[140px]
+    bg-[radial-gradient(circle,color-mix(in_srgb,var(--accent)_15%,transparent)_0%,transparent_70%)]">
+  </div>
+
+  <div class="flex flex-row items-center justify-between h-full px-[120px] relative z-10">
+    <figure class="relative size-[360px] flex items-center justify-center">
+      <div class="absolute size-[720px] flex items-center justify-center opacity-20 blur-[40px]">
+        {Icon && <Icon class="size-[720px]" />}
+      </div>
+
+      <div class="logo-icon-shadow relative size-[360px] flex items-center justify-center">
+        {Icon && <Icon class="size-[360px]" />}
+      </div>
+    </figure>
+
+    <p class="theme-label flex items-center text-7xl font-bold">
+      <span class="text-slate-400">{name}</span>
+      {suffix && <span class="text-[var(--accent)]">{suffix}</span>}
+    </p>
+  </div>
+</div>
+
+<style define:vars={{ accent: color }}>
+  :global(svg),
+  :global(svg path) {
+    fill: var(--accent);
+  }
+
+  .logo-icon-shadow {
+    filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 70%, transparent))
+      drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 35%, transparent));
+  }
+
+  .theme-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    letter-spacing: 4px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+</style>
