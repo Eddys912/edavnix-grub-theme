@@ -1,0 +1,24 @@
+{
+  "name": "EDAVNIX GRUB THEME",
+  "short_name": "Grub Theme",
+  "description": "Download custom themes for GRUB and Ventoy inspired by Linux distributions. Easy installation, modern design, and full compatibility. Improve your boot!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#89DCEB",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
