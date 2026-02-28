@@ -1,0 +1,51 @@
+# GRUB Theme - edavnix
+title-text: ""
+desktop-image: "background.png"
+
+# Main boot menu
++ boot_menu {
+  left = 25%
+  top = 25%
+  width = 50%
+  height = 60%
+
+  item_height = 64
+  item_padding = 20
+  item_spacing = 8
+
+  item_color = "#6e7380"
+  selected_item_color = "#1793d1"
+  selected_item_pixmap_style = "select_*.png"
+
+  item_font = "Space Mono Regular 24"
+
+  icon_width = 64
+  icon_height = 64
+  item_icon_space = 20
+}
+
+# Timeout label
++ label {
+  id = "__timeout__"
+  left = 30%
+  top = 83%
+  width = 40%
+  height = 24
+  align = "center"
+  color = "#1793d1"
+  font = "Space Mono Regular 16"
+  text = "Booting in %d seconds"
+}
+
+# Shortcuts
++ label {
+  id = "shortcuts"
+  left = 0%
+  top = 90%
+  width = 100%
+  height = 24
+  align = "center"
+  color = "#ffffff"
+  font = "Space Mono Regular 14"
+  text = "L: Language    F1: Help    F5: Tools"
+}
