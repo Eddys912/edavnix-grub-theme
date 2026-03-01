@@ -1,20 +1,25 @@
 ---
 import Canvas from '@components/Canvas.astro';
 import LayoutCanvas from '@layouts/LayoutCanvas.astro';
+import type { Paint } from '@src/types';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const allDistros = await getCollection('distros');
 
-  return allDistros.map(({ slug, data }) => ({
-    params: { slug },
-    props: {
+  return allDistros.map(({ slug, data }) => {
+    const props: Paint = {
       name: data.name,
       suffix: data.suffix,
       color: data.color,
       icon: data.icon,
-    },
-  }));
+    };
+
+    return {
+      params: slug,
+      props: props,
+    };
+  });
 }
 
 const { name, suffix, color, icon } = Astro.props;

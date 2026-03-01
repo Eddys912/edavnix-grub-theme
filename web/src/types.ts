@@ -1,13 +1,15 @@
 import type { CollectionEntry } from 'astro:content';
 
 export type ThemeData = CollectionEntry<'distros'>['data'];
+export type ThemeSlug = CollectionEntry<'distros'>['slug'];
 
-export type Canvas = Pick<ThemeData, 'name' | 'suffix' | 'color' | 'icon'>;
+export type AllData = ThemeData & { slug?: ThemeSlug };
 
-export type ThemeInfo = Pick<ThemeData, 'name' | 'suffix' | 'color' | 'tag' | 'image' | 'imageAlt'>;
+export type Paint = Pick<AllData, 'slug' | 'name' | 'suffix' | 'color' | 'icon'>;
 
-export type ThemeCard = ThemeInfo;
+export type Card = Pick<
+  AllData,
+  'slug' | 'name' | 'suffix' | 'color' | 'tag' | 'family' | 'image' | 'imageAlt'
+>;
 
-export type ThemeModal = ThemeInfo & Pick<ThemeData, 'family'> & { slug: string };
-
-export type ThemeDetail = Omit<ThemeData, 'icon'> & { slug: string };
+export type Detail = Omit<AllData, 'icon'>;
