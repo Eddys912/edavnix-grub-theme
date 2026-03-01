@@ -1,0 +1,27 @@
+---
+import Container from '@components/Container.astro';
+import ThemeGallery from '@components/svelte/ThemeGallery.svelte';
+import type { Card } from '@src/types';
+import { getCollection } from 'astro:content';
+
+const allDistros = await getCollection('distros');
+
+const items = allDistros.map(
+  ({ slug, data }): Card => ({
+    slug,
+    name: data.name,
+    suffix: data.suffix,
+    color: data.color,
+    tag: data.tag,
+    family: data.family,
+    image: data.image,
+    imageAlt: data.imageAlt,
+  })
+);
+---
+
+<main>
+  <Container class="py-12">
+    <ThemeGallery {items} client:load />
+  </Container>
+</main>
