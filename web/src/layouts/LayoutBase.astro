@@ -1,0 +1,49 @@
+---
+import Footer from '@sections/Footer.astro';
+import Header from '@sections/Header.astro';
+import '@src/global.css';
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Edavnix - Custom Linux Themes',
+  description = 'Download custom themes for GRUB and Ventoy inspired by Linux distributions.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f0f0f" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="canonical" href={Astro.url.href} />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+
+    <link rel="manifest" href="/manifest.json" />
+
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <ClientRouter />
+  </head>
+
+  <body>
+    <div class="grid min-h-dvh grid-rows-[auto_1fr_auto]">
+      <Header />
+      <div>
+        <slot />
+      </div>
+      <Footer />
+    </div>
+  </body>
+</html>

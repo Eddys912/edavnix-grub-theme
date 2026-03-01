@@ -1,0 +1,26 @@
+---
+import ThemeCanvas from '@components/ThemeCanvas.astro';
+import LayoutTheme from '@layouts/LayoutTheme.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allDistros = await getCollection('distros');
+
+  return allDistros.map(({ slug, data }) => ({
+    params: { slug },
+    props: {
+      name: data.name,
+      suffix: data.suffix,
+      color: data.color,
+      icon: data.icon,
+    },
+  }));
+}
+
+const { name, suffix, color, icon } = Astro.props;
+const title = [name, suffix].filter(Boolean).join(' ');
+---
+
+<LayoutTheme title={title}>
+  <ThemeCanvas name={name} suffix={suffix} color={color} icon={icon} />
+</LayoutTheme>

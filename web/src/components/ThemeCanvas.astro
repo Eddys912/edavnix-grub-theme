@@ -1,0 +1,55 @@
+---
+import * as DistroIcons from '@icons/distros';
+import type { ThemeBg } from '@src/types';
+
+interface Props extends ThemeBg {}
+
+const { name, suffix, color, icon } = Astro.props;
+const Icon = DistroIcons[icon as keyof typeof DistroIcons];
+---
+
+<div class="relative h-270 w-480 overflow-hidden bg-dark select-none">
+  <div class="orb absolute -top-20 right-0 size-300 rounded-full blur-[160px]"></div>
+
+  <div class="relative flex h-full flex-row items-center justify-between px-25">
+    <figure class="relative flex size-60 items-center justify-center">
+      <div class="absolute size-80 opacity-50 blur-md">
+        {Icon && <Icon />}
+      </div>
+
+      <div class="logo-icon-shadow size-60">
+        {Icon && <Icon />}
+      </div>
+    </figure>
+
+    <p class="theme-label rotate-180 text-6xl font-bold">
+      <span class="text-slate-400">{name}</span>
+      {suffix && <span class="text-(--accent)">{suffix}</span>}
+    </p>
+  </div>
+</div>
+
+<style define:vars={{ accent: color }}>
+  figure :global(svg),
+  figure :global(svg path) {
+    fill: var(--accent);
+  }
+
+  .orb {
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--accent) 15%, transparent) 0%,
+      transparent 70%
+    );
+  }
+
+  .logo-icon-shadow {
+    filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 70%, transparent))
+      drop-shadow(0 0 40px color-mix(in srgb, var(--accent) 35%, transparent));
+  }
+
+  .theme-label {
+    writing-mode: vertical-rl;
+    letter-spacing: 4px;
+  }
+</style>
