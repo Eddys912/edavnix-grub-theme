@@ -1,26 +1,13 @@
-import type { GetImageResult } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 
 export type ThemeData = CollectionEntry<'distros'>['data'];
 
-export type ThemeBg = Pick<ThemeData, 'name' | 'suffix' | 'color' | 'icon'>;
+export type Canvas = Pick<ThemeData, 'name' | 'suffix' | 'color' | 'icon'>;
 
-export type ThemeModal = Pick<
-  ThemeData,
-  'name' | 'suffix' | 'color' | 'tag' | 'family' | 'image' | 'imageAlt'
-> & { slug: string };
+export type ThemeInfo = Pick<ThemeData, 'name' | 'suffix' | 'color' | 'tag' | 'image' | 'imageAlt'>;
 
-export type ThemeCard = Pick<ThemeData, 'name' | 'suffix' | 'color' | 'tag' | 'image' | 'imageAlt'>;
+export type ThemeCard = ThemeInfo;
 
-export type ThemeDetail = Omit<ThemeData, 'image'> & { image: GetImageResult };
+export type ThemeModal = ThemeInfo & Pick<ThemeData, 'family'> & { slug: string };
 
-export interface CatalogItem {
-  slug: string;
-  name: string;
-  suffix?: string;
-  color: string;
-  tag: ThemeData['tag'];
-  family: ThemeData['family'];
-  imageSrc: string;
-  imageAlt: string;
-}
+export type ThemeDetail = Omit<ThemeData, 'icon'> & { slug: string };

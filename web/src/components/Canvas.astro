@@ -1,8 +1,8 @@
 ---
 import * as DistroIcons from '@icons/distros';
-import type { ThemeBg } from '@src/types';
+import type { Canvas } from '@src/types';
 
-interface Props extends ThemeBg {}
+interface Props extends Canvas {}
 
 const { name, suffix, color, icon } = Astro.props;
 const Icon = DistroIcons[icon as keyof typeof DistroIcons];
