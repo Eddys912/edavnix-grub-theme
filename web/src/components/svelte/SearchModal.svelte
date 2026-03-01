@@ -1,10 +1,10 @@
 <script lang="ts">
   import Search from '@src/icons/ui/Search.svelte';
   import portal from '@src/lib/portal';
-  import type { ThemeModal } from '@src/types';
+  import type { Card } from '@src/types';
   import { onDestroy, onMount } from 'svelte';
 
-  let { distros }: { distros: ThemeModal[] } = $props();
+  let { distros }: { distros: Card[] } = $props();
 
   let open = $state(false);
   let query = $state('');

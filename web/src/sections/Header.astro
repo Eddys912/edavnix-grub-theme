@@ -2,13 +2,13 @@
 import Container from '@components/Container.astro';
 import SearchModal from '@components/svelte/SearchModal.svelte';
 import GithubIcon from '@icons/ui/Github.svelte';
-import type { ThemeModal } from '@src/types';
+import type { Card } from '@src/types';
 import { getCollection } from 'astro:content';
 
 const allDistros = await getCollection('distros');
 
 const distros = allDistros.map(
-  ({ slug, data }): ThemeModal => ({
+  ({ slug, data }): Card => ({
     slug,
     name: data.name,
     suffix: data.suffix,

@@ -1,0 +1,39 @@
+---
+import Container from '@components/Container.astro';
+
+interface Props {
+  totalAmount: number;
+}
+
+const { totalAmount } = Astro.props;
+---
+
+<section class="relative overflow-hidden py-20">
+  <div class="orb absolute inset-0" aria-hidden="true"></div>
+
+  <Container class="relative mx-auto max-w-4xl py-6 text-center">
+    <h1 class="text-5xl leading-none font-black text-white uppercase md:text-8xl">
+      Grub Theme
+      <span class="block bg-linear-to-r from-arch to-arch/50 bg-clip-text text-transparent">
+        Collection
+      </span>
+    </h1>
+
+    <p class="text-shadow mt-4 text-xs font-bold tracking-widest text-arch uppercase sm:text-xl">
+      {totalAmount} Custom Linux Themes
+    </p>
+  </Container>
+</section>
+
+<style>
+  .orb {
+    background: radial-gradient(circle at 50% 50%, rgba(23, 147, 209, 0.2), transparent 80%);
+    mask-image: linear-gradient(black 90%, transparent 100%);
+  }
+
+  .text-shadow {
+    text-shadow:
+      0 0 10px rgba(23, 147, 209, 0.5),
+      0 0 20px rgba(23, 147, 209, 0.2);
+  }
+</style>
