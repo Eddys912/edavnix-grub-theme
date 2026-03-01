@@ -1,0 +1,21 @@
+---
+import '@src/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Export - {title}</title>
+  </head>
+
+  <body class="h-270 w-480 overflow-hidden">
+    <slot />
+  </body>
+</html>
