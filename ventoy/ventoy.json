@@ -1,0 +1,29 @@
+{
+  "theme": {
+    "enabled": true,
+    "file": "/ventoy/themes/edavnix/theme.txt",
+    "gfxmode": "1920x1080",
+    "display_mode": "GUI",
+    "serial_param": "--unit=0 --speed=9600",
+    "ventoy_left": "5%",
+    "ventoy_top": "95%",
+    "ventoy_color": "#1793d1"
+  },
+  "control": [
+    { "VTOY_DEFAULT_SEARCH_ROOT": "/" },
+    { "VTOY_MENU_TIMEOUT": "15" },
+    { "VTOY_DEFAULT_IMAGE": "/archlinux.iso" }
+  ],
+  "menu_alias": [
+    {
+      "image": "/archlinux.iso",
+      "alias": "Arch Linux"
+    }
+  ],
+  "menu_class": [
+    {
+      "key": "archlinux",
+      "class": "arch"
+    }
+  ]
+}
