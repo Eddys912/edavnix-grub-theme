@@ -1,0 +1,43 @@
+---
+import Container from '@components/Container.astro';
+import SearchModal from '@components/svelte/SearchModal.svelte';
+import GithubIcon from '@icons/ui/Github.svelte';
+import type { ThemeModal } from '@src/types';
+import { getCollection } from 'astro:content';
+
+const allDistros = await getCollection('distros');
+
+const distros = allDistros.map(
+  ({ slug, data }): ThemeModal => ({
+    slug,
+    name: data.name,
+    suffix: data.suffix,
+    color: data.color,
+    tag: data.tag,
+    family: data.family,
+    image: data.image,
+    imageAlt: data.imageAlt,
+  })
+);
+---
+
+<header class="sticky top-0 z-80 border-b border-edge bg-dark/70 py-3 backdrop-blur-md">
+  <Container class="flex items-center justify-between gap-8">
+    <a href="/" class="text-2xl font-bold text-white uppercase" aria-label="Go to home">
+      Edav<span class="text-arch">Nix</span>
+    </a>
+
+    <div class="flex w-full flex-1 items-center justify-end md:max-w-xl">
+      <SearchModal {distros} client:only="svelte" />
+    </div>
+
+    <a
+      class="text-white"
+      href="https://github.com/Eddys912/edavnix-grub-theme.git"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="View project on GitHub">
+      <GithubIcon class="size-6" aria-hidden="true" />
+    </a>
+  </Container>
+</header>

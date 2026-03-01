@@ -1,0 +1,13 @@
+---
+import LayoutBase from '@layouts/LayoutBase.astro';
+import Hero from '@sections/Hero.astro';
+import Main from '@sections/Main.astro';
+import { getCollection } from 'astro:content';
+
+const totalAmount = await getCollection('distros').then((d) => d.length);
+---
+
+<LayoutBase>
+  <Hero {totalAmount} />
+  <Main />
+</LayoutBase>
