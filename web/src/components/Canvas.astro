@@ -8,7 +8,7 @@ const { name, suffix, color, icon } = Astro.props;
 const Icon = DistroIcons[icon as keyof typeof DistroIcons];
 ---
 
-<div class="relative h-270 w-480 overflow-hidden bg-dark select-none">
+<main class="relative h-270 w-480 overflow-hidden bg-dark select-none">
   <div class="orb absolute -top-20 right-0 size-300 rounded-full blur-[160px]"></div>
 
   <div class="relative flex h-full flex-row items-center justify-between px-25">
@@ -27,7 +27,7 @@ const Icon = DistroIcons[icon as keyof typeof DistroIcons];
       {suffix && <span class="text-(--accent)">{suffix}</span>}
     </p>
   </div>
-</div>
+</main>
 
 <style define:vars={{ accent: color }}>
   figure :global(svg),
