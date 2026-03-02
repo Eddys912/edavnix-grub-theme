@@ -1,0 +1,327 @@
+---
+import { Image } from 'astro:assets';
+import Container from '@components/Container.astro';
+import ThemeTabs from '@components/svelte/ThemeTabs.svelte';
+import Clipboard from '@icons/ui/Clipboard.svelte';
+import Download from '@icons/ui/Download.svelte';
+import ExternalLink from '@icons/ui/ExternalLink.svelte';
+import LayoutBase from '@layouts/LayoutBase.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allDistros = await getCollection('distros');
+
+  return allDistros.map(({ slug, data }) => ({
+    params: { slug },
+    props: {
+      name: data.name,
+      suffix: data.suffix,
+      color: data.color,
+      tag: data.tag,
+      family: data.family,
+      image: data.image,
+      imageAlt: data.imageAlt,
+      packageManager: data.packageManager,
+      license: data.license,
+      releaseDate: data.releaseDate,
+      website: data.website,
+    },
+  }));
+}
+
+const { slug } = Astro.params;
+const all = await getCollection('distros');
+const entry = all.find((d) => d.slug === slug)!;
+const { Content } = await render(entry);
+
+const {
+  name,
+  suffix,
+  color,
+  image,
+  imageAlt,
+  family,
+  packageManager,
+  license,
+  releaseDate,
+  website,
+} = Astro.props;
+
+const fullName = [name, suffix].filter(Boolean).join(' ');
+const installCmd = `curl -sSL https://edavnix.com/install/${slug} | sudo bash`;
+const releaseDateFormatted = releaseDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<LayoutBase
+  title={`${fullName} - Edavnix Themes`}
+  description={`Custom GRUB theme inspired by ${fullName}. ${family} based distribution.`}>
+  <Container class="py-6 lg:py-10">
+    <!-- Breadcrumb -->
+    <nav class="mb-6 flex items-center gap-2 text-xs font-medium text-slate-600 uppercase">
+      <a href="/" class="transition-colors hover:text-slate-400">Home</a>
+      <span>/</span>
+      <span class="text-slate-400">{fullName}</span>
+    </nav>
+
+    <!-- ── Main grid: 7 + 5 ──────────────────────────────────────────────── -->
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+      <!-- ── LEFT col: imagen + tabs ───────────────────────────────────────── -->
+      <div class="space-y-5 lg:col-span-7">
+        <!-- Imagen -->
+        <div class="group relative overflow-hidden rounded-2xl border border-edge shadow-2xl">
+          <span
+            class="absolute top-3 left-3 z-10 rounded-full px-2.5 py-1 text-[10px] font-black tracking-widest text-dark uppercase"
+            style={`background: ${color}`}>
+            Preview
+          </span>
+          <Image
+            src={image}
+            alt={imageAlt}
+            width={1280}
+            height={720}
+            class="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+          />
+          <div
+            class="absolute inset-x-0 bottom-0 h-1/4 bg-linear-to-t from-black/60 to-transparent"
+            aria-hidden="true">
+          </div>
+        </div>
+
+        <!-- Tabs: Install / Description / Details -->
+        <ThemeTabs client:load>
+          <!-- ── Install ──────────────────────────────────────────────────── -->
+          <div slot="install" class="overflow-hidden rounded-2xl border border-edge bg-dark">
+            <!-- Terminal chrome -->
+            <div class="flex items-center justify-between border-b border-edge px-5 py-3">
+              <div class="flex gap-1.5">
+                <div class="size-3 rounded-full bg-red-500/80 ring-1 ring-red-500/20"></div>
+                <div class="size-3 rounded-full bg-yellow-400/80 ring-1 ring-yellow-400/20"></div>
+                <div class="size-3 rounded-full bg-emerald-400/80 ring-1 ring-emerald-400/20"></div>
+              </div>
+              <span class="text-xs font-bold tracking-widest text-slate-600 uppercase">
+                Quick Install
+              </span>
+              <div class="w-16"></div>
+            </div>
+
+            <!-- Command -->
+            <div class="p-5">
+              <div
+                class="flex items-center gap-3 rounded-xl border border-edge bg-white/3 px-4 py-3">
+                <span class="shrink-0 font-mono text-sm font-bold" style={`color: ${color}`}>$</span
+                >
+                <code
+                  class="flex-1 overflow-x-auto font-mono text-sm whitespace-nowrap text-slate-200 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  {installCmd}
+                </code>
+                <button
+                  type="button"
+                  data-copy={installCmd}
+                  aria-label="Copy install command"
+                  class="copy-btn flex shrink-0 items-center gap-2 rounded-lg border border-edge bg-white/5 px-3 py-1.5 text-xs font-bold text-slate-400 transition-all hover:border-white/20 hover:text-white active:scale-95">
+                  <Clipboard class="size-3.5" />
+                  <span class="copy-label">Copy</span>
+                </button>
+              </div>
+              <p class="mt-3 text-xs text-slate-600">
+                Installs to
+                <code class="rounded bg-white/5 px-1.5 py-0.5 text-slate-400">
+                  /boot/grub/themes/{slug}
+                </code>
+                and updates grub config automatically.
+              </p>
+            </div>
+          </div>
+
+          <!-- ── Description ─────────────────────────────────────────────── -->
+          <div
+            slot="description"
+            class="prose prose-invert prose-sm max-w-none rounded-2xl border border-edge bg-layer p-6 text-slate-400">
+            <Content />
+          </div>
+
+          <!-- ── Details ─────────────────────────────────────────────────── -->
+          <div slot="details" class="overflow-hidden rounded-2xl border border-edge bg-layer">
+            <dl class="divide-y divide-edge">
+              <div class="flex items-center justify-between px-5 py-3.5">
+                <dt class="text-xs font-medium text-slate-500">Name</dt>
+                <dd class="font-mono text-sm font-semibold text-white">{fullName}</dd>
+              </div>
+              <div class="flex items-center justify-between px-5 py-3.5">
+                <dt class="text-xs font-medium text-slate-500">Family</dt>
+                <dd class="flex items-center gap-2">
+                  <span class="size-2 rounded-full" style={`background: ${color}`}></span>
+                  <span class="font-mono text-sm font-semibold text-white">{family}</span>
+                </dd>
+              </div>
+              {
+                packageManager && (
+                  <div class="flex items-center justify-between px-5 py-3.5">
+                    <dt class="text-xs font-medium text-slate-500">Package Manager</dt>
+                    <dd class="rounded-lg border border-edge bg-white/5 px-3 py-1 font-mono text-xs font-bold text-slate-200">
+                      {packageManager}
+                    </dd>
+                  </div>
+                )
+              }
+              {
+                license && (
+                  <div class="flex items-center justify-between px-5 py-3.5">
+                    <dt class="text-xs font-medium text-slate-500">License</dt>
+                    <dd class="rounded-lg border border-edge bg-white/5 px-3 py-1 font-mono text-xs font-bold text-slate-200">
+                      {license}
+                    </dd>
+                  </div>
+                )
+              }
+              <div class="flex items-center justify-between px-5 py-3.5">
+                <dt class="text-xs font-medium text-slate-500">Released</dt>
+                <dd class="font-mono text-sm text-slate-300">{releaseDateFormatted}</dd>
+              </div>
+            </dl>
+          </div>
+        </ThemeTabs>
+      </div>
+
+      <!-- ── RIGHT col: tarjeta sticky ─────────────────────────────────────── -->
+      <aside class="lg:col-span-5">
+        <div class="sticky top-[calc(var(--header-h,64px)+1rem)] space-y-4">
+          <!-- Nombre + CTA card -->
+          <div class="overflow-hidden rounded-2xl border border-edge bg-layer">
+            <!-- Accent bar superior con el color del tema -->
+            <div class="h-1 w-full" style={`background: ${color}`}></div>
+
+            <div class="p-6">
+              <p class="mb-1 text-xs font-bold tracking-widest text-slate-500 uppercase">
+                {family}
+              </p>
+              <h1 class="mb-1 text-3xl font-black text-white">{fullName}</h1>
+              <p class="mb-6 text-sm text-slate-500">{releaseDateFormatted}</p>
+
+              <!-- Download CTA -->
+              <a
+                href={`/download/${slug}.zip`}
+                class="group relative mb-3 flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl py-3.5 text-sm font-black text-dark transition-all active:scale-[0.98]"
+                style={`background: ${color}; box-shadow: 0 8px 24px -4px ${color}50`}>
+                <div
+                  class="absolute inset-0 -translate-x-full skew-x-12 bg-white/20 transition-transform duration-500 group-hover:translate-x-full"
+                  aria-hidden="true">
+                </div>
+                <Download class="size-4" />
+                Download .ZIP
+              </a>
+
+              <!-- Website -->
+              <a
+                href={website}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex w-full items-center justify-center gap-2 rounded-xl border border-edge bg-white/5 py-3 text-sm font-semibold text-slate-300 transition-all hover:border-white/20 hover:text-white">
+                <ExternalLink
+                  class="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+                Official Website
+              </a>
+            </div>
+          </div>
+
+          <!-- Share -->
+          <div class="rounded-2xl border border-edge bg-layer p-5">
+            <p class="mb-3 text-[10px] font-black tracking-[0.3em] text-slate-600 uppercase">
+              Share
+            </p>
+            <div class="flex gap-2">
+              <button
+                type="button"
+                data-share="twitter"
+                data-name={fullName}
+                class="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-edge bg-white/5 py-2.5 text-xs font-semibold text-slate-400 transition-all hover:border-white/20 hover:text-white">
+                <svg class="size-3.5" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.258 5.63L18.244 2.25zM17.1 19.77h1.833L7.084 4.126H5.117z"
+                  ></path>
+                </svg>
+                Twitter
+              </button>
+              <button
+                type="button"
+                data-share="reddit"
+                data-name={fullName}
+                class="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-edge bg-white/5 py-2.5 text-xs font-semibold text-slate-400 transition-all hover:border-white/20 hover:text-white">
+                <svg class="size-3.5" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"
+                  ></path>
+                </svg>
+                Reddit
+              </button>
+              <button
+                type="button"
+                id="copy-link-btn"
+                class="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-edge bg-white/5 py-2.5 text-xs font-semibold text-slate-400 transition-all hover:border-white/20 hover:text-white">
+                <svg
+                  class="size-3.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+                Link
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </Container>
+</LayoutBase>
+
+<script>
+  // Copy command
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    const label = btn.querySelector<HTMLElement>('.copy-label');
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(btn.dataset.copy!);
+      if (label) label.textContent = 'Copied!';
+      btn.classList.add('!border-emerald-500/30', '!bg-emerald-500/10', '!text-emerald-400');
+      setTimeout(() => {
+        if (label) label.textContent = 'Copy';
+        btn.classList.remove('!border-emerald-500/30', '!bg-emerald-500/10', '!text-emerald-400');
+      }, 2000);
+    });
+  });
+
+  // Copy link
+  document.getElementById('copy-link-btn')?.addEventListener('click', async () => {
+    const btn = document.getElementById('copy-link-btn')!;
+    const span = btn.querySelector('span') ?? btn;
+    await navigator.clipboard.writeText(window.location.href);
+    const orig = span.textContent;
+    span.textContent = 'Copied!';
+    setTimeout(() => {
+      span.textContent = orig;
+    }, 1800);
+  });
+
+  // Share buttons
+  document.querySelectorAll<HTMLButtonElement>('[data-share]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const { share: platform, name } = btn.dataset as { share: string; name: string };
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(`Check out the ${name} GRUB theme on Edavnix Themes!`);
+      const links: Record<string, string> = {
+        twitter: `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+        reddit: `https://reddit.com/submit?url=${url}&title=${text}`,
+      };
+      window.open(links[platform], '_blank', 'width=600,height=400');
+    });
+  });
+</script>

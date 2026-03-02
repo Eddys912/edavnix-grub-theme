@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, sharpImageService } from 'astro/config';
 
 export default defineConfig({
+  site: import.meta.env.SITE,
   integrations: [svelte()],
   image: {
     service: sharpImageService(),

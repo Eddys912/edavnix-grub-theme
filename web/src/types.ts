@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 export type ThemeData = CollectionEntry<'distros'>['data'];
 export type ThemeSlug = CollectionEntry<'distros'>['slug'];
 
-export type AllData = ThemeData & { slug?: ThemeSlug };
+export type AllData = ThemeData & { slug: ThemeSlug };
 
 export type Paint = Pick<AllData, 'slug' | 'name' | 'suffix' | 'color' | 'icon'>;
 
