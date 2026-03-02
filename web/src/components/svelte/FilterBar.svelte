@@ -9,7 +9,8 @@
 </script>
 
 <div
-  class="flex w-full items-center justify-between gap-2 rounded-xl border border-edge bg-layer p-2 md:w-auto">
+  class="flex w-full items-center justify-between gap-2 rounded-xl border border-edge bg-layer
+    p-2 md:w-auto">
   {#each tags as tag}
     <button
       type="button"
