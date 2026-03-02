@@ -2,7 +2,7 @@
 name: 'Tails'
 color: '#56347c'
 tag: 'derivative'
-family: 'Debian'
+family: 'debian'
 icon: 'Tails'
 image: '../../assets/themes/tails.webp'
 imageAlt: 'GRUB theme for Tails'
@@ -14,5 +14,7 @@ website: 'https://tails.net'
 
 **The Amnesiac Incognito Live System** is a Debian-based distribution designed for absolute privacy
 and anonymity. It forces all connections through Tor, leaves no traces on the computer, and includes
-cryptographic tools. Journalists, whistleblowers, and privacy activists rely on it for secure
-communication in hostile environments.
+cryptographic tools.
+
+Journalists, whistleblowers, and privacy activists rely on it for secure communication in hostile
+environments.

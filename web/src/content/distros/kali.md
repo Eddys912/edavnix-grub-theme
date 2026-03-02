@@ -3,7 +3,7 @@ name: 'Kali'
 suffix: 'Linux'
 color: '#557c94'
 tag: 'derivative'
-family: 'Debian'
+family: 'debian'
 icon: 'Kali'
 image: '../../assets/themes/kali.webp'
 imageAlt: 'GRUB theme for Kali Linux'
@@ -15,5 +15,7 @@ website: 'https://kali.org'
 
 The **industry standard for penetration testing** and security auditing, developed and maintained by
 Offensive Security. It comes pre-loaded with hundreds of ethical hacking tools for forensics,
-vulnerability assessment, and exploitation. Designed for security professionals, it can run live
-from USB and includes specialized kernel patches for injection attacks.
+vulnerability assessment, and exploitation.
+
+Designed for security professionals, it can run live from USB and includes specialized kernel
+patches for injection attacks.

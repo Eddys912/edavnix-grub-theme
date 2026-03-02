@@ -2,7 +2,7 @@
 name: 'Kubuntu'
 color: '#0079c1'
 tag: 'derivative'
-family: 'Debian'
+family: 'debian'
 icon: 'Kubuntu'
 image: '../../assets/themes/kubuntu.webp'
 imageAlt: 'GRUB theme for Kubuntu'
@@ -14,5 +14,7 @@ website: 'https://kubuntu.org'
 
 An **official Ubuntu flavor** featuring the KDE Plasma desktop instead of GNOME. It combines
 Ubuntu's extensive software availability and stability with KDE's highly customizable, modern
-interface. The familiar, Windows-like layout makes it accessible to newcomers while offering deep
-customization for power users who want aesthetic control.
+interface.
+
+The familiar, Windows-like layout makes it accessible to newcomers while offering deep customization
+for power users who want aesthetic control.

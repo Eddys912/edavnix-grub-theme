@@ -2,7 +2,7 @@
 name: 'Anonymous'
 color: '#ffffff'
 tag: 'design'
-family: 'Special'
+family: 'special'
 icon: 'Anonymous'
 image: '../../assets/themes/anonymous.webp'
 imageAlt: 'Anonymous mask GRUB theme'

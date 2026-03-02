@@ -3,7 +3,7 @@ name: 'Parrot'
 suffix: 'Security'
 color: '#15e0ed'
 tag: 'derivative'
-family: 'Debian'
+family: 'debian'
 icon: 'Parrot'
 image: '../../assets/themes/parrot.webp'
 imageAlt: 'GRUB theme for Parrot Security'
@@ -15,5 +15,7 @@ website: 'https://parrotsec.org'
 
 A **Debian-based security distribution** focused on penetration testing, privacy, and digital
 forensics. It includes a full arsenal of ethical hacking tools while maintaining a usable daily
-driver experience. With Tor integration, encrypted persistence, and anonymity features, it's
-popular among security researchers and privacy-conscious users.
+driver experience.
+
+With Tor integration, encrypted persistence, and anonymity features, it's popular among security
+researchers and privacy-conscious users.

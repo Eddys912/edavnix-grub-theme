@@ -2,7 +2,7 @@
 name: 'Ubuntu'
 color: '#e95420'
 tag: 'derivative'
-family: 'Debian'
+family: 'debian'
 icon: 'Ubuntu'
 image: '../../assets/themes/ubuntu.webp'
 imageAlt: 'GRUB theme for Ubuntu'
@@ -14,5 +14,7 @@ website: 'https://ubuntu.com'
 
 The **most popular Linux distribution** worldwide, developed by Canonical based on Debian. It
 features six-month releases with LTS versions every two years, offering a balance of stability and
-currency. Its user-friendly approach, extensive community support, and massive software ecosystem
-make it the default choice for Linux newcomers.
+currency.
+
+Its user-friendly approach, extensive community support, and massive software ecosystem make it the
+default choice for Linux newcomers.
