@@ -7,7 +7,6 @@ import Footer from '@sections/Footer.astro';
 import Header from '@sections/Header.astro';
 
 import {
-  SITE,
   SITE_AUTHOR,
   SITE_DESC,
   SITE_KEYWORDS,
@@ -16,6 +15,7 @@ import {
   SITE_OG_IMAGE,
   SITE_THEME_COLOR,
   SITE_TITLE,
+  SITE_URL,
 } from 'astro:env/server';
 
 interface Props {
@@ -26,8 +26,8 @@ interface Props {
 
 const { title = SITE_TITLE, description = SITE_DESC, image = SITE_OG_IMAGE } = Astro.props;
 
-const canonicalURL = SITE ? new URL(Astro.url.pathname, SITE).href : Astro.url.href;
-const imageURL = new URL(image, SITE ?? Astro.url.origin).href;
+const canonicalURL = SITE_URL ? new URL(Astro.url.pathname, SITE_URL).href : Astro.url.href;
+const imageURL = new URL(image, SITE_URL ?? Astro.url.origin).href;
 ---
 
 <!doctype html>

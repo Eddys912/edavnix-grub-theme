@@ -5,10 +5,10 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   integrations: [svelte()],
-  site: import.meta.env.SITE,
+  site: import.meta.env.SITE_URL,
   env: {
     schema: {
-      SITE: envField.string({
+      SITE_URL: envField.string({
         context: 'server',
         access: 'public',
       }),
