@@ -15,8 +15,8 @@
     <button
       type="button"
       onclick={() => onchange(tag)}
-      class="cursor-pointer rounded-lg px-4 py-1.5 text-sm font-bold uppercase transition-colors
-        {activeTag === tag ? 'bg-arch/10 text-arch' : 'text-slate-400 hover:text-white'}">
+      class="rounded-lg px-4 py-1.5 text-sm font-bold uppercase transition-colors
+        {activeTag === tag ? 'bg-arch text-dark' : 'text-slate-400 hover:text-white'}">
       {tag}
     </button>
   {/each}

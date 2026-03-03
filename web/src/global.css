@@ -45,10 +45,17 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  scrollbar-color: var(--color-edge) transparent;
+  scrollbar-width: thin;
 }
 
 body {
   color: #ffffff;
   background-color: var(--color-dark);
   font-family: var(--font-sans);
+}
+
+a,
+button {
+  cursor: pointer;
 }

@@ -1,6 +1,5 @@
 <script lang="ts">
-  import ChevronLeft from '@src/icons/ui/ChevronLeft.svelte';
-  import ChevronRight from '@src/icons/ui/ChevronRight.svelte';
+  import { ChevronLeftIcon, ChevronRightIcon } from '@src/icons/ui';
 
   interface Props {
     currentPage: number;
@@ -38,9 +37,9 @@
     class="flex size-9 items-center justify-center rounded border text-sm font-bold
       transition-all disabled:pointer-events-none disabled:opacity-30
       {currentPage > 1
-      ? 'cursor-pointer border-edge text-slate-400 hover:border-arch hover:text-arch'
+      ? 'border-edge text-slate-400 hover:border-arch hover:text-arch'
       : 'border-edge text-slate-400'}">
-    <ChevronLeft class="size-4" />
+    <ChevronLeftIcon class="size-4" />
   </button>
 
   {#each pages as p}
@@ -52,7 +51,7 @@
         onclick={() => onchange(p)}
         aria-label="Page {p}"
         aria-current={p === currentPage ? 'page' : undefined}
-        class="flex size-9 cursor-pointer items-center justify-center rounded border text-sm
+        class="flex size-9 items-center justify-center rounded border text-sm
           font-bold transition-all {p === currentPage
           ? 'border-arch bg-arch text-dark'
           : 'border-edge text-slate-400 hover:border-arch hover:text-arch'}">
@@ -69,8 +68,8 @@
     class="flex size-9 items-center justify-center rounded border text-sm font-bold
       transition-all disabled:pointer-events-none disabled:opacity-30
       {currentPage < totalPages
-      ? 'cursor-pointer border-edge text-slate-400 hover:border-arch hover:text-arch'
+      ? 'border-edge text-slate-400 hover:border-arch hover:text-arch'
       : 'border-edge text-slate-400'}">
-    <ChevronRight class="size-4" />
+    <ChevronRightIcon class="size-4" />
   </button>
 </nav>

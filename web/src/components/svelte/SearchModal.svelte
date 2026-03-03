@@ -1,8 +1,9 @@
 <script lang="ts">
-  import Search from '@src/icons/ui/Search.svelte';
+  import { onDestroy, onMount } from 'svelte';
+
+  import { SearchIcon } from '@src/icons/ui';
   import portal from '@src/lib/portal';
   import type { Card } from '@src/types';
-  import { onDestroy, onMount } from 'svelte';
 
   let { distros }: { distros: Card[] } = $props();
 
@@ -88,20 +89,20 @@
   onclick={openModal}
   class="flex cursor-pointer items-center justify-center rounded text-white md:hidden"
   aria-label="Open search">
-  <Search class="size-6" />
+  <SearchIcon class="size-6" />
 </button>
 
 <!-- Trigger desktop (md+)  -->
 <button
   type="button"
   onclick={openModal}
-  class="hidden w-full cursor-pointer items-center gap-2 rounded border border-edge bg-dark px-3
-    py-2 text-base text-slate-400 transition-colors hover:bg-layer focus:outline-none md:flex"
+  class="hidden w-full items-center gap-2 rounded border border-edge bg-dark px-3 py-2 text-base
+    text-slate-400 transition-colors hover:bg-layer focus:outline-none md:flex"
   aria-label="Open search">
-  <Search class="size-5" />
+  <SearchIcon class="size-5" />
   <span class="flex-1 text-left">Search themes...</span>
   <kbd
-    class="shrink-0 rounded border border-edge bg-layer px-2 py-0.5 text-sm font-semibold
+    class="shrink-0 rounded border border-edge bg-layer px-2 py-0.5 text-sm font-normal
     text-slate-400">
     Ctrl K
   </kbd>
@@ -123,7 +124,7 @@
       class="fixed top-[15%] left-1/2 z-100 flex max-h-[80dvh] w-[calc(100%-2rem)] max-w-lg
         -translate-x-1/2 flex-col overflow-hidden rounded-xl border border-edge bg-layer">
       <div class="flex items-center gap-3 border-b border-edge px-4">
-        <Search class="size-5 shrink-0 text-slate-400" />
+        <SearchIcon class="size-5 shrink-0 text-slate-400" />
         <!-- svelte-ignore a11y_autofocus -->
         <input
           autofocus
@@ -158,8 +159,8 @@
                     object-contain"
                   style="box-shadow: 0 0 6px {distro.color}77" />
                 <div class="flex-1">
-                  <p class="truncate text-base font-black">{distro.name} {distro.suffix}</p>
-                  <p class="text-sm font-extralight text-slate-400">{distro.family}</p>
+                  <p class="truncate text-base font-bold">{distro.name} {distro.suffix}</p>
+                  <p class="text-sm font-light text-slate-400">{distro.family}</p>
                 </div>
                 <span
                   class="shrink-0 rounded-full border px-1.5 py-0.5 text-xs md:text-sm"
@@ -179,3 +180,14 @@
     </div>
   </div>
 {/if}
+
+<style>
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-results-button,
+  input[type='search']::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+  }
+</style>

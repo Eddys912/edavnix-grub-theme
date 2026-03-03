@@ -1,6 +1,7 @@
 <script lang="ts">
-  import DownloadZip from '@components/svelte/DownloadZip.svelte';
   import type { Card } from '@src/types';
+
+  import DownloadZip from '@components/svelte/DownloadZip.svelte';
 
   interface Props extends Card {}
 
