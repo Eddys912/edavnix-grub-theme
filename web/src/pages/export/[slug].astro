@@ -1,8 +1,11 @@
 ---
-import Canvas from '@components/Canvas.astro';
-import LayoutCanvas from '@layouts/LayoutCanvas.astro';
-import type { Paint } from '@src/types';
 import { getCollection } from 'astro:content';
+
+import type { Paint } from '@src/types';
+
+import LayoutCanvas from '@layouts/LayoutCanvas.astro';
+
+import Canvas from '@components/Canvas.astro';
 
 export async function getStaticPaths() {
   const allDistros = await getCollection('distros');

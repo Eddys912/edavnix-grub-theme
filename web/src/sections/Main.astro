@@ -1,8 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
+
+import type { Card } from '@src/types';
+
 import Container from '@components/Container.astro';
 import ThemeGallery from '@components/svelte/ThemeGallery.svelte';
-import type { Card } from '@src/types';
-import { getCollection } from 'astro:content';
 
 const allDistros = await getCollection('distros');
 
