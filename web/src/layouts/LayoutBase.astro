@@ -19,7 +19,7 @@ const {
   image = '/og.png',
 } = Astro.props;
 
-const canonicalURL = Astro.url.href;
+const canonicalURL = SITE ? new URL(Astro.url.pathname, SITE).href : Astro.url.href;
 // const imageURL = SITE ? new URL(image, SITE).href : image;
 const imageURL = new URL(image, SITE ?? Astro.url.origin).href;
 console.log('Canonical URL:', canonicalURL);
