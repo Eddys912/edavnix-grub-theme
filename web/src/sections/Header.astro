@@ -1,9 +1,11 @@
 ---
+import { getCollection } from 'astro:content';
+
+import { GithubIcon } from '@icons/ui';
+import type { Card } from '@src/types';
+
 import Container from '@components/Container.astro';
 import SearchModal from '@components/svelte/SearchModal.svelte';
-import GithubIcon from '@icons/ui/Github.svelte';
-import type { Card } from '@src/types';
-import { getCollection } from 'astro:content';
 
 const allDistros = await getCollection('distros');
 
